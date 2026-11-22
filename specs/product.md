@@ -8,6 +8,7 @@
 | **Kind** | Umbrella (product-wide). Feature specs refine it — see [specs/README.md](README.md). |
 | **Last updated** | 2026-11-22 |
 | **How we work** | [docs/workflow.md](../docs/workflow.md) |
+| **Decisions** | [docs/adr/](../docs/adr/README.md) |
 
 This is the single source of truth for *what* Sprich! is and *why*. Work packages (GitHub issues) link here by requirement ID. Change this file **before** changing behaviour, and log every change in the [Changelog](#changelog).
 
@@ -23,24 +24,27 @@ Sprich! is a Telegram bot for daily practice through writing, vocabulary and con
 
 - Adults living in Germany, working or studying in another language.
 - Their everyday language is **English, Ukrainian or Russian** (more later). All explanations, instructions and summaries come in that language; the language being learned is always **German**.
+- More confident learners can switch the whole interface to **German** for immersion.
 - Level **A2–B2**: past the basics, not yet fluent.
 - They practise in short daily sessions on their phone.
 
 ## Key decisions
 
-| ID | Area | Decision | Why |
-|---|---|---|---|
-| D-1 | Interface | Telegram bot first (aiogram 3). Web app possibly later. | Lives where users already chat daily; no UI to build. |
-| D-2 | Stack | Python, FastAPI, LangGraph. Provider SDK (Anthropic/OpenAI) called directly inside graph nodes; no LangChain layer. Pydantic for structured output. | Fewer abstraction layers; learn the primitives. |
-| D-3 | Database | Postgres (JSONB for flexible payloads, pgvector later, LangGraph Postgres checkpointer). SQLAlchemy + Alembic. | One store for app data and agent state. |
-| D-4 | Spaced repetition | FSRS (`fsrs` Python package). | Modern scheduler, better retention than SM-2. |
-| D-5 | Local dev | docker-compose (app + Postgres), bot in long-polling mode. | No public URL needed locally. |
-| D-6 | Hosting | Railway, **EU region**, managed Postgres; webhook mode with secret-token check. Alternatives: Fly.io, Render, Hetzner. | Simple ops; EU data residency. |
-| D-7 | Observability | Langfuse (or LangSmith). | LLM traces, latency and cost per call. |
-| D-8 | Open source | Public repo, **AGPL-3.0**. Tuned prompts and curated content are private and loaded from `PROMPTS_DIR`. Secrets only in env vars. | Open code; the hosted product keeps its edge. |
-| D-9 | Contributions | No outside contributions at first (or require a CLA). | Keeps licensing options open. |
-| D-10 | Languages | Multilingual interface from v0.1: `en`, `uk`, `ru`. German is the only learning target. | The audience reads explanations best in their own language. |
-| D-11 | Monetization | Later, optional: paid hosted bot (subscription); possible premium parts: voice, curriculum, exam prep. | Not a goal before v1.0. |
+Founding decisions from the project brief. Decisions made since are recorded as ADRs in [docs/adr/](../docs/adr/README.md); an ADR that adds or changes a product-wide decision also adds or updates a row here and links it.
+
+| ID | Area | Decision | Why | ADR |
+|---|---|---|---|---|
+| D-1 | Interface | Telegram bot first (aiogram 3). Web app possibly later. | Lives where users already chat daily; no UI to build. | — |
+| D-2 | Stack | Python, FastAPI, LangGraph. Provider SDK (Anthropic/OpenAI) called directly inside graph nodes; no LangChain layer. Pydantic for structured output. | Fewer abstraction layers; learn the primitives. | — |
+| D-3 | Database | Postgres (JSONB for flexible payloads, pgvector later, LangGraph Postgres checkpointer). SQLAlchemy + Alembic. | One store for app data and agent state. | — |
+| D-4 | Spaced repetition | FSRS (`fsrs` Python package). | Modern scheduler, better retention than SM-2. | — |
+| D-5 | Local dev | docker-compose (app + Postgres), bot in long-polling mode. | No public URL needed locally. | — |
+| D-6 | Hosting | Railway, **EU region**, managed Postgres; webhook mode with secret-token check. Alternatives: Fly.io, Render, Hetzner. | Simple ops; EU data residency. | — |
+| D-7 | Observability | Langfuse (or LangSmith). | LLM traces, latency and cost per call. | — |
+| D-8 | Open source | Public repo, **AGPL-3.0**. Tuned prompts and curated content are private and loaded from `PROMPTS_DIR`. Secrets only in env vars. | Open code; the hosted product keeps its edge. | — |
+| D-9 | Contributions | No outside contributions at first (or require a CLA). | Keeps licensing options open. | — |
+| D-10 | Languages | Multilingual interface from v0.1: `en`, `uk`, `ru`, plus `de` for confident learners. German is the only learning target. | Most learners read explanations best in their own language; confident ones learn more by staying in German. | — |
+| D-11 | Monetization | Later, optional: paid hosted bot (subscription); possible premium parts: voice, curriculum, exam prep. | Not a goal before v1.0. | — |
 
 ## Architecture
 
@@ -49,10 +53,10 @@ Sprich! is a Telegram bot for daily practice through writing, vocabulary and con
 - **Thin bot layer.** Handlers translate Telegram into calls to `core/`. `core/` never imports Telegram code.
 - **Partner ≠ analyzer.** The conversation partner keeps the chat flowing. A separate analyzer extracts structured mistakes **in the background**, after the reply is sent.
 - **Mistakes are events.** `mistakes` is an append-only log → rolled up into `skill_mastery` → used by the planner to choose exercises (raw → aggregated → used, like a medallion architecture).
-- **Two languages per user.** *Target* language is German (fixed). *Interface* language is per user (`en`, `uk`, `ru`; ISO 639-1 — Ukrainian is `uk`, not `ua`).
+- **Two languages per user.** *Target* language is German (fixed). *Interface* language is per user (`en`, `uk`, `ru`, `de`; ISO 639-1 — Ukrainian is `uk`, not `ua`).
   - Static bot text comes from per-locale message catalogs.
   - LLM-generated explanations, correction comments and summaries are produced in the interface language (passed to prompts as a parameter).
-  - German learning content (tasks, corrected text, conversation) stays German.
+  - German learning content (tasks, corrected text, conversation) stays German. With the `de` interface, everything is German.
   - `core/` and the database store language-neutral codes, never translated labels.
   - Adding a language = add a catalog + register the locale. No other code changes.
 
@@ -127,7 +131,7 @@ EARS format; IDs are stable and never reused (see [specs/README.md](README.md#re
 
 ### I18N — Localization (v0.1)
 
-- **I18N-1** — THE SYSTEM SHALL store one interface language per user, chosen from the supported locales (`en`, `uk`, `ru`).
+- **I18N-1** — THE SYSTEM SHALL store one interface language per user, chosen from the supported locales (`en`, `uk`, `ru`, `de`).
 - **I18N-2** — THE SYSTEM SHALL render all static user-facing text from per-locale message catalogs; handlers and `core/` SHALL NOT contain hard-coded user-facing text.
 - **I18N-3** — IF a message key is missing from the user's locale catalog, THEN THE SYSTEM SHALL use the `en` text and log the missing key.
 - **I18N-4** — THE SYSTEM SHALL generate explanations, correction comments and summaries in the user's interface language, and SHALL keep German learning content in German.
@@ -194,11 +198,11 @@ Each milestone lists its requirements and a *Done when* checklist. Feature specs
 
 ### v0.1 — Foundation (local)
 
-Repo, license, README, `.env.example`, docker-compose, Postgres + Alembic, aiogram polling, i18n with `en`/`uk`/`ru`, `/start` onboarding, LLM client wrapper, CI (lint + tests).
+Repo, license, README, `.env.example`, docker-compose, Postgres + Alembic, aiogram polling, i18n with `en`/`uk`/`ru`/`de`, `/start` onboarding, LLM client wrapper, CI (lint + tests).
 **Requirements:** FND-1…10, I18N-1…6, ONB-1…5, PRV-1…3.
 **Done when:**
 - [ ] The bot answers `/start` on the author's laptop and saves the profile.
-- [ ] Onboarding works end to end in each of `en`, `uk`, `ru`.
+- [ ] Onboarding works end to end in each of `en`, `uk`, `ru`, `de`.
 - [ ] CI is green on the PR that completes the milestone.
 
 ### v0.2 — Writing + mistake capture
@@ -276,6 +280,7 @@ Each has a working assumption. **Blocks** names the requirements that can't be i
 | Q-17 | `skill_mastery` formula? | Defined in v0.7. | v0.7 |
 | Q-18 | GDPR export format and data retention? | Defined in v1.0. | v1.0 |
 | Q-19 | Contributions: none, or allowed with a CLA? | None until v1.0. | v1.0 |
+| Q-20 | With the `de` interface, should explanations be simplified to the learner's level? | Yes — plain German at or just below the user's level. | I18N-4 |
 
 ## Naming
 
@@ -292,9 +297,11 @@ Each has a working assumption. **Blocks** names the requirements that can't be i
 - **Mistake** — one recorded error event in a learner's German text, with a taxonomy category.
 - **Skill area** — a taxonomy category as tracked in `skill_mastery` (not to be confused with Claude Code skills in `.claude/skills/`).
 - **Card** — an FSRS vocabulary card.
-- **Interface language** — the language of the bot's instructions and explanations (`en`, `uk`, `ru`). **Target language** — German.
+- **Interface language** — the language of the bot's instructions and explanations (`en`, `uk`, `ru`, `de`). **Target language** — German.
+- **ADR** — Architecture/product Decision Record in [docs/adr/](../docs/adr/README.md): why a significant choice was made, with the alternatives.
 - **Mode** — how Claude Code works on a WP: Guide, Pair or Delegate (see [docs/workflow.md](../docs/workflow.md#working-modes)).
 
 ## Changelog
 
+- **2026-11-22** — Added `de` interface language for confident learners (D-10, I18N-1, Q-20): immersion option requested by the author. Key decisions table gains an ADR column; new decisions are recorded as ADRs (ADR-0001), founding decisions are not backfilled.
 - **2026-11-22** — Initial version from the project brief. Added: multilingual interface (`en`/`uk`/`ru`) as D-10 and `I18N` requirements; `other` mistake category; proposed allowlist OPS-5; open questions Q-1…Q-19.

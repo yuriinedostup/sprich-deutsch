@@ -27,7 +27,7 @@ Ask one question at a time, until you can write requirements without guessing:
 
 - Why does the learner need this? What does success look like?
 - Challenge assumptions: is there a simpler version? What breaks if we skip it?
-- Edge cases: wrong input, repeated commands, failures, other languages (`en`/`uk`/`ru`).
+- Edge cases: wrong input, repeated commands, failures, other interface languages (`en`/`uk`/`ru`/`de`).
 - What is explicitly **not** part of this?
 
 Skip what the umbrella spec or issue already answers. If superpowers `brainstorming` is available, you may use it to run this interview — but stop before its design-doc step: the output is the spec below, written to `specs/`, never to `docs/superpowers/`.
@@ -42,7 +42,7 @@ New spec: copy `specs/_template.md`. Fill every section:
 - **Out of scope** — what you heard is *not* included.
 - **Acceptance criteria** — checkable, each mapped to requirement IDs.
 - **Open questions** — each with a working assumption and a **Blocks** value (requirement IDs it blocks, or `no`). Never silently assume: an unanswered question goes here.
-- **Message keys** — for any new user-facing text (all of `en`, `uk`, `ru` will need them).
+- **Message keys** — for any new user-facing text (every shipped catalog — `en`, `uk`, `ru`, `de` — will need them).
 - **Changelog** — first line: date, "Initial draft", why.
 
 Updating a spec:

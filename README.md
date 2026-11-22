@@ -8,7 +8,7 @@ Many people living in Germany understand German but can't **speak** it with conf
 - **Learn from mistakes** — every mistake is recorded by type (cases, word order, adjective endings…), and practice is planned around your weak areas.
 - **Talk & review** — conversation practice (text, later voice) and spaced-repetition vocabulary built from your own gaps.
 
-Explanations come in **English, Ukrainian or Russian**; the language you practise is always German. Levels A2–B2.
+Explanations come in **English, Ukrainian or Russian** — or in **German**, for confident learners who want full immersion. The language you practise is always German. Levels A2–B2.
 
 ## Status
 
@@ -18,7 +18,7 @@ Explanations come in **English, Ukrainian or Russian**; the language you practis
 
 | Milestone | What |
 |---|---|
-| v0.1 Foundation | Local setup, `/start` onboarding in `en`/`uk`/`ru`, LLM wrapper, CI |
+| v0.1 Foundation | Local setup, `/start` onboarding in `en`/`uk`/`ru`/`de`, LLM wrapper, CI |
 | v0.2 Writing + mistakes | `/write` with corrections, typed mistake capture, `/stats` |
 | v0.3 Deploy & dogfood | Hosted 24/7 (EU), daily reminders, `/settings` |
 | v0.4 Vocabulary | FSRS cards from mistakes and unknown words, `/vocab`, `/add` |

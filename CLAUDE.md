@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Sprich!** — a Telegram bot that coaches German speaking, records every mistake by type, and plans practice around weak areas. Interface in English, Ukrainian or Russian; target language German.
+**Sprich!** — a Telegram bot that coaches German speaking, records every mistake by type, and plans practice around weak areas. Interface in English, Ukrainian, Russian or German; target language German.
 
 - Product spec (source of truth): [specs/product.md](specs/product.md)
 - How we work (full rules): [docs/workflow.md](docs/workflow.md)
@@ -69,6 +69,6 @@ Issues, PRs, specs, plans and commits are all public. Never put in them: secrets
 - **Partner ≠ analyzer** — the reply goes out first; a separate analyzer extracts structured mistakes in the background.
 - **Mistakes are events** — append-only `mistakes` → rolled up into `skill_mastery` → used by the planner.
 - **LLM calls** go through one wrapper with Pydantic structured output; provider SDK called directly in LangGraph nodes, no LangChain.
-- **Localization** — interface language per user (`en`, `uk`, `ru`). No hard-coded user-facing text: every key in **all** catalogs in the same PR. DB stores codes, never translated labels. German content stays German.
+- **Localization** — interface language per user (`en`, `uk`, `ru`, `de`). No hard-coded user-facing text: every key in **all** catalogs in the same PR. DB stores codes, never translated labels. German content stays German.
 
 Target layout and tables: [specs/product.md → Architecture](specs/product.md#architecture).

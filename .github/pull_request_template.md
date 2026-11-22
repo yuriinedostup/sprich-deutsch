@@ -42,5 +42,5 @@ Closes #
 
 - [ ] Lint and tests pass
 - [ ] No secrets, private prompts or real learner data in code, commits or this PR
-- [ ] All user-facing text in catalogs, keys present in `en`, `uk`, `ru`
+- [ ] All user-facing text in catalogs, keys present in `en`, `uk`, `ru`, `de`
 - [ ] Spec updated first if behaviour changed

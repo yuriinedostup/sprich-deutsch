@@ -118,7 +118,7 @@ Use made-up examples (`user 42`, `"Ich habe gestern in Berlin gearbeitet"`). Ski
 
 ## Localization
 
-- Never hard-code user-facing text. Add a message key to **every** shipped catalog (`en`, `uk`, `ru`) in the same PR.
+- Never hard-code user-facing text. Add a message key to **every** shipped catalog (`en`, `uk`, `ru`, `de`) in the same PR.
 - Store language-neutral codes, never translated labels.
 - German learning content stays German; explanations use the user's interface language.
 

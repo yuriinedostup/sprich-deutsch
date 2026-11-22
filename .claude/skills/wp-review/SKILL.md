@@ -25,7 +25,7 @@ Argument given → focus on that plan task or path, but still note anything else
 1. **Correctness** — bugs, unhandled errors, async mistakes, wrong SQL/ORM use, failing edge cases from the spec.
 2. **Traceability** — each change maps to a requirement ID or plan task. Untraceable change → scope creep (remove it) or a spec gap (`/spec` update). Required behaviour with no code → missing.
 3. **Architecture** — `core/` imports no Telegram/aiogram code; handlers stay thin; analyzer runs after the reply; mistakes are append-only; DB stores codes, not translated labels.
-4. **Localization** — no hard-coded user-facing text; every new key exists in `en`, `uk` and `ru` catalogs.
+4. **Localization** — no hard-coded user-facing text; every new key exists in every shipped catalog (`en`, `uk`, `ru`, `de`).
 5. **Tests** — each acceptance criterion touched has a test or a stated manual check.
 6. **Over-engineering** — abstractions, options or layers the spec doesn't need.
 7. **Privacy** — no secrets, `.env` values, prompt text, real learner data or Telegram IDs in code, tests, logs or comments.
