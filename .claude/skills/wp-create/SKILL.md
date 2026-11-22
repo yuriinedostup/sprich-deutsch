@@ -14,7 +14,7 @@ Turn a spec (or one milestone of `specs/product.md`) into GitHub issues, one per
 ## 1. Check readiness
 
 - Target spec exists and its **Status** is `Approved` (or the author explicitly says to proceed with `Draft`).
-- List open questions that block this milestone/spec. If any: stop and offer `/spec` to resolve them first.
+- List open questions whose **Blocks** column names requirements in scope. Don't stop for them — they are settled at `/wp-start` of the WP that touches them. Note each on the affected WP (`Resolve Q-n at start`). Stop and offer `/spec` only if an answer would change how the work is cut into WPs.
 - Check what already exists so you don't duplicate: `gh issue list --label wp --milestone "<milestone>" --state all`.
 
 ## 2. Propose the breakdown

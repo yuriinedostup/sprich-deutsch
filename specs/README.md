@@ -8,7 +8,7 @@ Specs are the written contract between intent and code. Claude Code and humans i
 
 | Spec | Kind | Status | Covers |
 |---|---|---|---|
-| [product.md](product.md) | Umbrella | Draft | Whole product: intent, decisions, architecture, requirements v0.1–v0.3, milestones |
+| [product.md](product.md) | Umbrella | Approved | Whole product: intent, decisions, architecture, requirements v0.1–v0.3, milestones |
 
 Add a row whenever a feature spec is created or changes status.
 

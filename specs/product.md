@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Status** | Draft |
+| **Status** | Approved |
 | **Kind** | Umbrella (product-wide). Feature specs refine it — see [specs/README.md](README.md). |
 | **Last updated** | 2026-11-22 |
 | **How we work** | [docs/workflow.md](../docs/workflow.md) |
@@ -303,5 +303,6 @@ Each has a working assumption. **Blocks** names the requirements that can't be i
 
 ## Changelog
 
+- **2026-11-22** — Approved by the author for v0.1 work. Open questions stay open; each is resolved when a WP touches the requirements it blocks.
 - **2026-11-22** — Added `de` interface language for confident learners (D-10, I18N-1, Q-20): immersion option requested by the author. Key decisions table gains an ADR column; new decisions are recorded as ADRs (ADR-0001), founding decisions are not backfilled.
 - **2026-11-22** — Initial version from the project brief. Added: multilingual interface (`en`/`uk`/`ru`) as D-10 and `I18N` requirements; `other` mistake category; proposed allowlist OPS-5; open questions Q-1…Q-19.
