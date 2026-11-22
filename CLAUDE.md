@@ -33,12 +33,14 @@ Specs, plans and docs may be drafted in any mode.
 - A **blocking open question** in the spec stops implementation of what it blocks. Ask; don't assume.
 - Every change must trace to a requirement ID. If it doesn't, it's scope creep or a spec gap — say which.
 - Conventions: [specs/README.md](specs/README.md).
+- A **significant decision** (hard to reverse, real alternatives, crosses modules) gets an ADR in [docs/adr/](docs/adr/README.md) via `/adr`. Recommend an option; the author decides. Accepted ADRs are never edited — supersede them.
 
 ## Skills
 
 | Command | When |
 |---|---|
 | `/spec` | Create or update a spec |
+| `/adr` | Record a significant architecture or product decision |
 | `/wp-create` | Cut a spec/milestone into WP issues (user only) |
 | `/wp-start` | Pick up a WP: mode, spec needs, plan, branch |
 | `/wp-review` | Review the branch against plan and spec |
@@ -46,9 +48,9 @@ Specs, plans and docs may be drafted in any mode.
 
 ## Superpowers (if installed)
 
-Project skills own the flow and the **output formats**: specs go to `specs/` in [the template](specs/_template.md), plans to `docs/plans/` in [the plan format](docs/plans/README.md) — never `docs/superpowers/`.
+Project skills own the flow and the **output formats**: specs go to `specs/` in [the template](specs/_template.md), ADRs to `docs/adr/` in [the ADR template](docs/adr/_template.md), plans to `docs/plans/` in [the plan format](docs/plans/README.md) — never `docs/superpowers/`.
 
-- Writing specs (any mode): `brainstorming` may drive the interview; output is a project spec.
+- Writing specs or ADRs (any mode): `brainstorming` may drive the interview; output is a project spec or ADR.
 - **Delegate**: any superpowers skill when useful (`writing-plans`, `executing-plans`, `subagent-driven-development`, TDD, debugging, verification).
 - **Guide / Pair**: no superpowers skills that write implementation code or drive execution.
 
@@ -61,7 +63,7 @@ Project skills own the flow and the **output formats**: specs go to `specs/` in 
 
 ## Privacy & secrets — the repo is public
 
-Issues, PRs, specs, plans and commits are all public. Never put in them: secrets or `.env` values, anything from `PROMPTS_DIR` (tuned prompts, curated content), real learner data (messages, mistakes, Telegram IDs), personal details, infra URLs or IDs. Use made-up examples. Secrets live only in env vars; `.env` is never committed.
+Issues, PRs, specs, ADRs, plans and commits are all public. Never put in them: secrets or `.env` values, anything from `PROMPTS_DIR` (tuned prompts, curated content), real learner data (messages, mistakes, Telegram IDs), personal details, infra URLs or IDs. Use made-up examples. Secrets live only in env vars; `.env` is never committed.
 
 ## Architecture principles
 

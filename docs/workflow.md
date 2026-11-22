@@ -16,6 +16,8 @@ Intent ──▶ Spec ──▶ Work packages ──▶ Start + Plan ──▶ I
 
 Every arrow is a **review gate**: nothing moves on until the author has checked it.
 
+At any step, a **significant decision** (hard to reverse, real alternatives, crosses modules) is recorded as an **ADR** with `/adr` — see [docs/adr/README.md](adr/README.md).
+
 1. **Intent** — what we want, in plain words (the brief, an idea, a bug report).
 2. **Spec** — intent turned into a written contract: EARS requirements, out of scope, acceptance criteria, open questions. See [specs/README.md](../specs/README.md).
 3. **Work packages** — the spec cut into issues, ordered by dependency.
@@ -30,6 +32,7 @@ Every arrow is a **review gate**: nothing moves on until the author has checked 
 |---|---|---|
 | Umbrella spec | [specs/product.md](../specs/product.md) | Product-wide source of truth |
 | Feature specs | `specs/<feature>.md` | One living file per capability |
+| Decision records (ADRs) | [docs/adr/](adr/README.md) | Why significant choices were made; immutable once accepted |
 | Work packages | GitHub issues, label `wp`, grouped by milestone | Link to spec + requirement IDs |
 | Plans | `docs/plans/<issue>-<slug>.md` | Committed on the WP branch; survives across sessions; reviewed in the PR |
 | Code review | Pull requests | Body from [.github/pull_request_template.md](../.github/pull_request_template.md) |
@@ -79,7 +82,7 @@ The project skills own the flow, the gates and the **output formats**. Superpowe
 
 | Situation | Superpowers use | Output goes to |
 |---|---|---|
-| Writing or updating a spec (any mode) | `brainstorming` may drive the interview and design | `specs/<feature>.md` in our template — never `docs/superpowers/` |
+| Writing or updating a spec or ADR (any mode) | `brainstorming` may drive the interview and explore options | `specs/<feature>.md` or `docs/adr/NNNN-….md` in our templates — never `docs/superpowers/` |
 | **Delegate** mode | Any skill when useful: `writing-plans`, `executing-plans`, `subagent-driven-development`, `test-driven-development`, `systematic-debugging`, `verification-before-completion` | Plans in `docs/plans/<n>-<slug>.md` in our format |
 | **Guide** / **Pair** mode | No skill that writes implementation code or drives execution (`executing-plans`, `subagent-driven-development`, TDD as implementer) | — |
 
@@ -90,6 +93,7 @@ Whatever tool produced it, a spec looks like [specs/_template.md](../specs/_temp
 | Command | Use it to | Who triggers it |
 |---|---|---|
 | `/spec` | Create or update a spec (umbrella or feature) | You or Claude |
+| `/adr` | Record a significant architecture or product decision | You or Claude |
 | `/wp-create` | Cut a spec or milestone into WP issues | You only — posts to GitHub |
 | `/wp-start` | Pick up a WP: choose mode, settle spec needs, plan, branch | You |
 | `/wp-review` | Review the branch so far against plan and spec | You or Claude |
@@ -99,7 +103,7 @@ Skills live in [.claude/skills/](../.claude/skills/).
 
 ## Git & PRs
 
-- Never commit to `master`. Branch per WP: `wp/<issue>-<slug>`. Non-WP work: `chore/<slug>`, `docs/<slug>`, `spec/<slug>`.
+- Never commit to `master`. Branch per WP: `wp/<issue>-<slug>`. Non-WP work: `chore/<slug>`, `docs/<slug>`, `spec/<slug>`, `docs/adr-<slug>`.
 - **Conventional Commits** with the issue number: `feat(onboarding): ask interface language first (#12)`.
 - PR body from the template, with `Closes #N`. Every acceptance criterion has evidence; every change traces to a requirement.
 - **Squash merge.** Delete the branch after merge.

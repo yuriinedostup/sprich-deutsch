@@ -25,7 +25,7 @@ Take the earliest open milestone. A WP is **unblocked** when every `Depends on #
 - `gh issue view <n> --comments`
 - Every spec it links to — read the referenced sections and requirement IDs, plus the related parts of `specs/product.md` (principles, decisions).
 - Check: all dependencies closed; `git status` clean; `master` up to date (`git switch master && git pull`). Report problems instead of working around them.
-- Check the open questions in the linked specs (and `specs/product.md`). Any whose **Blocks** column names one of this WP's requirement IDs → resolve with the author and update the spec via `/spec` before planning.
+- Check the open questions in the linked specs (and `specs/product.md`). Any whose **Blocks** column names one of this WP's requirement IDs → resolve with the author and update the spec via `/spec` before planning. If the answer weighs real alternatives (provider, library, data model), record it with `/adr`.
 
 ## 3. Ask (one question at a time; skip what's already known)
 

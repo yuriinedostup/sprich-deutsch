@@ -49,7 +49,7 @@ Updating a spec:
 
 - Never renumber. Removed requirement → strike through with date and reason.
 - Add a Changelog line: date, what changed, **why**.
-- Answered open question → move the answer into requirements/background, delete or mark the row resolved.
+- Answered open question → move the answer into requirements/background, delete or mark the row resolved. If the answer weighed real alternatives, record it with `/adr` first and link the ADR.
 - Umbrella touched? Keep `specs/product.md` consistent too.
 
 Update the index table in `specs/README.md` for a new spec or a status change.

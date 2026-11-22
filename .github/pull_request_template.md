@@ -30,6 +30,10 @@ Closes #
 
 <!-- Any change not traceable to a requirement is scope creep or a spec gap: fix one or the other. -->
 
+## Decisions
+
+<!-- None, or: ADRs added / superseded (docs/adr/NNNN-….md), all Accepted. -->
+
 ## Spec changes
 
 <!-- None, or: what changed in which spec and why (also in the spec's Changelog). -->

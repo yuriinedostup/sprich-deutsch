@@ -58,6 +58,10 @@ Every open question has a **working assumption** and a **Blocks** value: the req
 - **Log why.** Every change adds a line to the spec's Changelog: date, what changed, why.
 - **Don't spec while exploring.** If the direction is still unclear, explore first (a throwaway spike), then write the spec once it is.
 
+## Specs and decisions (ADRs)
+
+A spec says **what** the system does. An [ADR](../docs/adr/README.md) says **why** it is built a certain way, with the alternatives that were rejected. When answering an open question involves a real trade-off, record the choice as an ADR (`/adr`), then resolve the question in the spec and link the ADR. Easy-to-reverse choices only need a Changelog line.
+
 ## When a work package needs its own spec
 
 A WP needs a feature spec (or an update to an existing one) when **any** of these is true:

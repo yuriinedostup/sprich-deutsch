@@ -23,7 +23,7 @@ For each criterion in the plan's verification table, record the evidence: test n
 
 ## 3. Traceability and review
 
-Run the `/wp-review` checks on the whole branch diff (`git diff master...HEAD`). Build the table: requirement ID → files / tests. Any change without a requirement → remove it, or update the spec (step 4).
+Run the `/wp-review` checks on the whole branch diff (`git diff master...HEAD`). Build the table: requirement ID → files / tests. Any change without a requirement → remove it, or update the spec (step 4). Any significant decision made during the WP without an ADR → write it with `/adr` before the PR. ADRs on this branch must be `Accepted` before the PR is opened.
 
 ## 4. Sync the spec
 
@@ -43,7 +43,7 @@ Scan the full diff and the PR body for secrets, `.env` values, `PROMPTS_DIR` con
 
 ## 7. Open the PR
 
-Write the body from `.github/pull_request_template.md`: `Closes #<n>`, summary, mode, spec + requirement IDs, acceptance criteria with evidence, traceability table, spec changes, how to test, checklist. Show it to the author and wait for the go-ahead. Then:
+Write the body from `.github/pull_request_template.md`: `Closes #<n>`, summary, mode, spec + requirement IDs, ADRs added or superseded, acceptance criteria with evidence, traceability table, spec changes, how to test, checklist. Show it to the author and wait for the go-ahead. Then:
 
 ```bash
 git push -u origin HEAD

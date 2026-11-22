@@ -28,7 +28,8 @@ Argument given → focus on that plan task or path, but still note anything else
 4. **Localization** — no hard-coded user-facing text; every new key exists in every shipped catalog (`en`, `uk`, `ru`, `de`).
 5. **Tests** — each acceptance criterion touched has a test or a stated manual check.
 6. **Over-engineering** — abstractions, options or layers the spec doesn't need.
-7. **Privacy** — no secrets, `.env` values, prompt text, real learner data or Telegram IDs in code, tests, logs or comments.
+7. **Decisions** — code that commits to a significant choice (new dependency, provider, data model, cross-module pattern) with no ADR → flag it and suggest `/adr`. Code that contradicts an accepted ADR → design-level finding.
+8. **Privacy** — no secrets, `.env` values, prompt text, real learner data or Telegram IDs in code, tests, logs or comments.
 
 ## 3. Report and fix — by who wrote the code
 

@@ -37,7 +37,7 @@ Python · FastAPI · aiogram 3 · LangGraph · Pydantic · Postgres (SQLAlchemy,
 
 Spec-driven, with [Claude Code](https://claude.com/claude-code):
 
-1. Intent → a **spec** in [`specs/`](specs/) with testable requirements.
+1. Intent → a **spec** in [`specs/`](specs/) with testable requirements; significant choices recorded as **decision records** in [`docs/adr/`](docs/adr/).
 2. Spec → **work packages** as GitHub issues.
 3. Each work package → a reviewed **plan** → implementation → **PR** where every change traces back to the spec.
 
