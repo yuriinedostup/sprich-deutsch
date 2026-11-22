@@ -200,7 +200,16 @@ Each milestone lists its requirements and a *Done when* checklist. Feature specs
 
 Repo, license, README, `.env.example`, docker-compose, Postgres + Alembic, aiogram polling, i18n with `en`/`uk`/`ru`/`de`, `/start` onboarding, LLM client wrapper, CI (lint + tests).
 **Requirements:** FND-1…10, I18N-1…6, ONB-1…5, PRV-1…3.
+
+**Walking skeleton (first WP).** Before anything else, a minimal bot proves the plumbing end to end and dry-runs the workflow (`/wp-create` → `/wp-start` → `/wp-review` → `/wp-finish`) on a tiny change.
+- Project setup (`pyproject.toml`), settings from env with the bot token (FND-2, FND-3), aiogram long polling (FND-5), one command to run it.
+- The bot sends any text message back unchanged. It adds no text of its own, so no message catalogs yet. Non-text messages are ignored.
+- **Temporary:** the echo is removed when `/start` onboarding lands.
+- **Not included:** Postgres, Alembic, Docker, FastAPI, CI, LLM calls — those are the next WPs.
+- **Needs first:** bot username checked and token created in BotFather (Q-14). The token lives only in `.env`.
+
 **Done when:**
+- [ ] Walking skeleton: any text sent to the bot on the author's laptop comes back unchanged.
 - [ ] The bot answers `/start` on the author's laptop and saves the profile.
 - [ ] Onboarding works end to end in each of `en`, `uk`, `ru`, `de`.
 - [ ] CI is green on the PR that completes the milestone.
@@ -303,6 +312,7 @@ Each has a working assumption. **Blocks** names the requirements that can't be i
 
 ## Changelog
 
+- **2026-11-22** — Added a walking skeleton (echo bot) as v0.1's first step: proves token, config and polling before onboarding builds on them, and dry-runs the WP workflow on a tiny change. Temporary, so no new requirement IDs.
 - **2026-11-22** — Approved by the author for v0.1 work. Open questions stay open; each is resolved when a WP touches the requirements it blocks.
 - **2026-11-22** — Added `de` interface language for confident learners (D-10, I18N-1, Q-20): immersion option requested by the author. Key decisions table gains an ADR column; new decisions are recorded as ADRs (ADR-0001), founding decisions are not backfilled.
 - **2026-11-22** — Initial version from the project brief. Added: multilingual interface (`en`/`uk`/`ru`) as D-10 and `I18N` requirements; `other` mistake category; proposed allowlist OPS-5; open questions Q-1…Q-19.
