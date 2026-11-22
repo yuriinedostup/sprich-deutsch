@@ -122,7 +122,7 @@ EARS format; IDs are stable and never reused (see [specs/README.md](README.md#re
 - **FND-2** — THE SYSTEM SHALL read all configuration from environment variables via pydantic-settings, and `.env.example` SHALL list every variable with placeholder values only.
 - **FND-3** — IF a required setting is missing at startup, THEN THE SYSTEM SHALL exit with an error naming the missing setting, without printing any secret value.
 - **FND-4** — THE SYSTEM SHALL change the database schema only through Alembic migrations.
-- **FND-5** — WHERE `BOT_MODE=polling`, THE SYSTEM SHALL receive Telegram updates by long polling; WHERE `BOT_MODE=webhook`, THE SYSTEM SHALL receive them on a webhook endpoint.
+- **FND-5** — WHERE `BOT_MODE=polling`, THE SYSTEM SHALL receive Telegram updates by long polling. (Webhook mode moved to OPS-6 in v0.3.)
 - **FND-6** — WHEN the health endpoint is requested, THE SYSTEM SHALL respond `200` if the database is reachable and `503` otherwise.
 - **FND-7** — THE SYSTEM SHALL call LLMs only through one client wrapper that returns Pydantic-validated structured output.
 - **FND-8** — IF an LLM call fails or its output fails validation, THEN THE SYSTEM SHALL retry a bounded number of times and then send the user a localized error message.
@@ -170,6 +170,7 @@ EARS format; IDs are stable and never reused (see [specs/README.md](README.md#re
 ### OPS — Deploy & operations (v0.3)
 
 - **OPS-1** — THE SYSTEM SHALL run on Railway in an EU region with managed Postgres.
+- **OPS-6** — WHERE `BOT_MODE=webhook`, THE SYSTEM SHALL receive Telegram updates on a webhook endpoint.
 - **OPS-2** — WHERE `BOT_MODE=webhook`, IF a webhook request lacks a valid Telegram secret-token header, THEN THE SYSTEM SHALL reject it without processing the update.
 - **OPS-3** — THE SYSTEM SHALL send a trace of every LLM call (model, latency, tokens, cost) to Langfuse.
 - **OPS-4** — WHEN a new version is deployed, THE SYSTEM SHALL apply pending migrations before handling updates.
@@ -224,7 +225,7 @@ Repo, license, README, `.env.example`, docker-compose, Postgres + Alembic, aiogr
 ### v0.3 — Deploy & dogfood
 
 Railway (EU), webhook + secret token, managed Postgres, Langfuse, daily reminder, minimal `/settings`.
-**Requirements:** OPS-1…5, RMD-1…3, SET-1…2.
+**Requirements:** OPS-1…6, RMD-1…3, SET-1…2.
 **Done when:**
 - [ ] The bot runs 24/7 and the author uses it daily from their phone.
 
@@ -312,6 +313,7 @@ Each has a working assumption. **Blocks** names the requirements that can't be i
 
 ## Changelog
 
+- **2026-11-22** — Moved webhook mode from FND-5 (v0.1) to new OPS-6 (v0.3); FND-5 is now polling only. Why: webhook mode can't be exercised locally without a public URL, and v0.3 reworks the same endpoint for the secret-token check (OPS-2) at deploy time — building it once, there, avoids doing it twice.
 - **2026-11-22** — Added a walking skeleton (echo bot) as v0.1's first step: proves token, config and polling before onboarding builds on them, and dry-runs the WP workflow on a tiny change. Temporary, so no new requirement IDs.
 - **2026-11-22** — Approved by the author for v0.1 work. Open questions stay open; each is resolved when a WP touches the requirements it blocks.
 - **2026-11-22** — Added `de` interface language for confident learners (D-10, I18N-1, Q-20): immersion option requested by the author. Key decisions table gains an ADR column; new decisions are recorded as ADRs (ADR-0001), founding decisions are not backfilled.
