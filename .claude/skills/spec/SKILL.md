@@ -41,7 +41,7 @@ New spec: copy `specs/_template.md`. Fill every section:
 - **Requirements** in EARS, one behaviour each. IDs continue the area's numbering — find the highest used ID with `grep -rhoE '\*\*<AREA>-[0-9]+' specs/` and add one.
 - **Out of scope** — what you heard is *not* included.
 - **Acceptance criteria** — checkable, each mapped to requirement IDs.
-- **Open questions** — each with a working assumption and a `blocking` value. Never silently assume: an unanswered question goes here.
+- **Open questions** — each with a working assumption and a **Blocks** value (requirement IDs it blocks, or `no`). Never silently assume: an unanswered question goes here.
 - **Message keys** — for any new user-facing text (all of `en`, `uk`, `ru` will need them).
 - **Changelog** — first line: date, "Initial draft", why.
 
@@ -62,7 +62,7 @@ Specs are public. Before showing the draft, check it contains no secrets, prompt
 
 Show the author the spec (or the diff for an update) and list:
 - assumptions you made,
-- open questions marked blocking.
+- open questions that block requirements (Blocks ≠ `no`).
 
 Wait for approval. Then set **Status: Approved** (if the author agrees it's ready), commit:
 

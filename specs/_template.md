@@ -69,9 +69,9 @@ bot:  ⟨response⟩
 
 ## Open questions
 
-| # | Question | Assumption | Blocking |
+| # | Question | Assumption | Blocks |
 |---|---|---|---|
-| Q-1 | ⟨…⟩ | ⟨…⟩ | ⟨WP/milestone or no⟩ |
+| Q-1 | ⟨…⟩ | ⟨…⟩ | ⟨requirement IDs, or no⟩ |
 
 ## Changelog
 

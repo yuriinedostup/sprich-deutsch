@@ -253,24 +253,24 @@ Web app, realtime voice, exam prep (Goethe/telc), paid hosted tier.
 
 ## Open questions
 
-Each has a working assumption. A question marked **blocking** must be answered (and this spec updated) before work on that milestone starts.
+Each has a working assumption. **Blocks** names the requirements that can't be implemented until the question is answered (and this spec updated) — `/wp-start` resolves it with the author when a WP touches them. `no` = the assumption stands unless someone objects.
 
-| # | Question | Assumption | Blocking |
+| # | Question | Assumption | Blocks |
 |---|---|---|---|
-| Q-1 | Which LLM provider for v0.1 — Anthropic or OpenAI? | One provider behind the wrapper (FND-7); chosen in the v0.1 LLM-wrapper WP. | v0.1 |
-| Q-2 | What does a public clone run without the private prompts? | Minimal default prompts ship in the repo; `PROMPTS_DIR` overrides them (PRV-2). | v0.1 |
-| Q-3 | Which i18n library? | aiogram's built-in i18n with gettext catalogs; decided in the v0.1 i18n WP. | v0.1 |
-| Q-4 | Prompts per language or one prompt with a language parameter? | One German-focused prompt, interface language passed as a parameter (I18N-4). | v0.2 |
+| Q-1 | Which LLM provider for v0.1 — Anthropic or OpenAI? | One provider behind the wrapper (FND-7); chosen when that WP starts. | FND-7 |
+| Q-2 | What does a public clone run without the private prompts? | Minimal default prompts ship in the repo; `PROMPTS_DIR` overrides them (PRV-2). | PRV-2 |
+| Q-3 | Which i18n library? | aiogram's built-in i18n with gettext catalogs; decided when that WP starts. | I18N-2 |
+| Q-4 | Prompts per language or one prompt with a language parameter? | One German-focused prompt, interface language passed as a parameter (I18N-4). | I18N-4, WRT-2 |
 | Q-5 | Does "more languages" ever mean more *learning* languages? | No — only more interface languages; other target languages are out of scope. | no |
-| Q-6 | Learning goals list for onboarding (ONB-2)? | Fixed codes: `everyday`, `work`, `behoerde`, `small_talk`; more later. | v0.1 |
-| Q-7 | Reminder timezone? | `Europe/Berlin` for everyone until v1.0. | v0.3 |
-| Q-8 | Who may use the bot once it is public 24/7 at v0.3? Cost caps only come in v1.0. | Allowlist of Telegram user IDs from an env var (OPS-5). **Needs your decision.** | v0.3 |
+| Q-6 | Learning goals list for onboarding (ONB-2)? | Fixed codes: `everyday`, `work`, `behoerde`, `small_talk`; more later. | ONB-2 |
+| Q-7 | Reminder timezone? | `Europe/Berlin` for everyone until v1.0. | RMD-1 |
+| Q-8 | Who may use the bot once it is public 24/7 at v0.3? Cost caps only come in v1.0. | Allowlist of Telegram user IDs from an env var (OPS-5). **Needs your decision.** | OPS-5 |
 | Q-9 | `/settings` and `/stop` had no milestone in the brief. | Minimal `/settings` in v0.3, `/stop` in v0.5, strictness in v0.7. | no |
-| Q-10 | For `/write`, does the correction call also emit structured mistakes, or does the separate analyzer always run? | Separate analyzer, reused by `/write` and `/talk` (partner ≠ analyzer). | v0.2 |
+| Q-10 | For `/write`, does the correction call also emit structured mistakes, or does the separate analyzer always run? | Separate analyzer, reused by `/write` and `/talk` (partner ≠ analyzer). | MST-1 |
 | Q-11 | Time window for `/stats` v1? | All time. | no |
 | Q-12 | Should the reminder skip days the user already practised? | No in v0.3; revisit with the planner. | no |
-| Q-13 | Langfuse or LangSmith? | Langfuse (EU cloud or self-hosted). | v0.3 |
-| Q-14 | Telegram username `@sprich_bot` available? | Fallback `@sprich_deutsch_bot`; check with BotFather. | v0.1 |
+| Q-13 | Langfuse or LangSmith? | Langfuse (EU cloud or self-hosted). | OPS-3 |
+| Q-14 | Telegram username `@sprich_bot` available? | Fallback `@sprich_deutsch_bot`; check with BotFather. | no — check before creating the bot |
 | Q-15 | Correction strictness levels — what are they? | Defined with the planner. | v0.7 |
 | Q-16 | Speech-to-text / text-to-speech providers? | Chosen in v0.6. | v0.6 |
 | Q-17 | `skill_mastery` formula? | Defined in v0.7. | v0.7 |

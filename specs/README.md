@@ -50,7 +50,7 @@ One behaviour per requirement. If you need "and" to describe two behaviours, wri
 
 ## Open questions
 
-Every open question has a **working assumption** and a **blocking** flag (which milestone or WP it blocks, or `no`). Blocking questions must be answered — and the spec updated — **before** implementation of what they block starts. That is where the most expensive rework comes from.
+Every open question has a **working assumption** and a **Blocks** value: the requirement IDs that can't be implemented until it is answered (a milestone if no IDs exist yet), or `no` if the assumption can stand. A blocking question must be answered — and the spec updated — **before** implementation of what it blocks starts. That is where the most expensive rework comes from.
 
 ## Change discipline
 
